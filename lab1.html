@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+
+    //1st question
+    var first=function()
+    {
+        console.log("Hello world");
+    }
+
+
+    var second= function(value)
+    {
+        value();
+    }
+
+
+    second(first);
+
+    // extrathings done
+
+
+    var printHello=function ()
+    {
+        return function()
+        {
+            console.log('Hello world');
+        }
+    }
+
+    function print(func)
+    {
+        var exec=func();
+        exec();
+    }
+
+
+    print(printHello);
+    //2nd question
+    var person={
+        name:"Nive",
+        age:12,
+        ambition:"doctor",
+        printname:function()
+        {
+            console.log(this.name);
+        },
+        printage:function()
+        {
+            console.log(this.age);
+        }
+    };
+
+    //3rd question
+    //a)
+    var VehicleName="van";
+    //b)
+    function printVehicleName()
+    {
+        console.log(this.VehicleName);
+    }
+    //c)
+    var Vehicle={
+        VehicleName:"car",
+        getVehicleName:printVehicleName
+    };
+
+    //d
+    printVehicleName();//van
+    Vehicle.getVehicleName();//car
+
+
+    //extrathings done in video
+    var VehicleName="Toyota";
+
+    function printVehicleName()
+    {
+        console.log(this.VehicleName);
+
+    }
+
+    var car={
+        VehicleName:"Nissan",
+        printName:function()
+        {
+            return function()
+            {
+                console.log(this.VehicleName);
+            }
+        }
+    }
+
+
+    var exec=car.printName();
+    exec();//Toyota
+
+
+    var exec=car.printName();
+    execute=exec.bind(car);//bind the context to a function.function is a object.So it has methods and properties.bind is one method.
+    execute();
+
+
+    //4th question
+    //closure is a function access its parent functions context,variable all
+    //clousure enforce encapsulation(hide details)
+    //here if calcutor function is only visibal for customers they cant see the taxpercentage they cant modify it.
+    function tax(taxpercentage)
+    {
+        return function(amount)
+        {
+            return amount*taxpercentage;
+        }
+    }
+
+    var calculator=tax(0.12);
+    console.log(calculator(200))
+
+</script>
+</body>
+</html>

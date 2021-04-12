@@ -1,0 +1,20 @@
+use sliit
+//3rd question
+db.student.insertOne({name: "John",dateOfBirth: new Date(),subjects: ["Application frameworks", "Computer Architecture"]});
+//4th question
+db.student.find({name:"John"});
+//5th question
+db.student.find({_id:ObjectId("6074466fd4c4a65983c2a81d")});
+//6th question
+db.student.updateOne({name:"John"},{$push:{subjects:"Distributed computing"}});
+//7th question
+db.student.insertMany([{name: "Smith",dateOfBirth: new Date(),subjects: ["Application frameworks", "Computer architecture"],isActive: true},
+{name: "Jane",dateOfBirth:new Date(),subjects: ["Application frameworks", "Computer architecture"],isActive: false}]);
+db.student.find({name:"Smith",isActive:true});
+//8th question
+db.student.update({name:"Smith",isActive:true},{$push:{subjects:"Distributed computing"}});
+//9th question
+db.student.updateOne({},{$set:{isActive:false}});
+//10th question
+db.student.deleteOne({});
+db.student.find();

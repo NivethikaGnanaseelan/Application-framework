@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //1st question
+    //a
+    function getvalue()
+    {
+        let value=0;
+        setTimeout(function ()
+        {
+            return value;
+        },1000);
+    }
+    getvalue();
+
+    //b
+    function getvalue(callback)
+    {
+        let value=0;
+        setTimeout(function ()
+        {
+            callback(value);
+        },1000);
+    }
+    getvalue(function (value)
+    {
+        console.log(value);
+    });
+
+    //c
+    function getvalue()
+    {
+
+        return new Promise(function (resolve, reject)
+        {
+            let value=0;
+            setTimeout(function (){
+                resolve(value);
+
+            })
+        })
+    }
+
+    getvalue().then(function (value)
+    {
+        console.log(value);
+    })
+
+    //d
+    function getvalue()
+    {
+
+        return new Promise(function (resolve, reject)
+        {
+            let value=0;
+            setTimeout(function (){
+                value=10;
+                resolve(value);
+
+            })
+        })
+    }
+
+    function getNewValue(value)
+    {
+        return new Promise(function (resolve, reject)
+        {
+            setTimeout(function()
+            {
+                resolve(value*100);
+            })
+
+        })
+    }
+
+    getvalue().then(function (value)
+    {
+        return getNewValue(value);
+    }).then(function (value)
+    {
+        console.log(value);
+    })
+
+
+    //2nd question
+
+    function Vehicle(type)
+    {
+        Vehicle.VehicleCount++;
+        this.type=type;
+    }
+    Vehicle.VehicleCount=0;
+
+    Vehicle.prototype.print=function ()
+    {
+        console.log('Vehicle is driving');
+    }
+
+    var van=new Vehicle('van');
+    console.log(Vehicle.VehicleCount);
+    console.log(van.type);
+
+    function Car(type)
+    {
+        Vehicle.call(this,type);
+        this.balanceWheels=function()
+        {
+            console.log('Wheels are balanced');
+        }
+    }
+
+    Car.prototype=Object.create(Vehicle.prototype);
+    Car.prototype.constructor=Car;
+
+    var yaris=new Car('car');
+    yaris.print();
+    yaris.balanceWheels();
+
+    console.log(Vehicle.VehicleCount);
+    console.log(yaris.type);
+
+    //3rd questions
+
+
+    function Vehicle(type)
+    {
+        Vehicle.VehicleCount++;
+        this.type=type;
+    }
+    Vehicle.VehicleCount=0;
+
+    Vehicle.prototype.print=()=>
+    {
+        console.log('Vehicle is driving');
+    }
+
+    var van=new Vehicle('van');
+    console.log(Vehicle.VehicleCount);
+    console.log(van.type);
+
+    function Car(type)
+    {
+        Vehicle.call(this,type);
+        this.balanceWheels=()=>
+        {
+            console.log('Wheels are balanced');
+        }
+    }
+
+    Car.prototype=Object.create(Vehicle.prototype);
+    Car.prototype.constructor=Car;
+
+    var yaris=new Car('car');
+    yaris.print();
+    yaris.balanceWheels();
+
+    console.log(Vehicle.VehicleCount);
+    console.log(yaris.type);
+
+
+
+    //4th question
+    function getValue()
+    {
+
+        return new Promise(function (resolve, reject)
+        {
+            let value=0;
+            setTimeout(function (){
+                resolve(value);
+
+            })
+        })
+    }
+
+
+    async function print()
+    {
+        let value=await getValue();
+        console.log(value);
+    }
+
+    print();
+    //5th question
+    class Vehicle
+    {
+        static VehicleCount=0;
+        constructor(type) {
+            Vehicle.VehicleCount++;
+            this.type=type;
+        }
+        getType()
+        {
+            return this.type;
+        }
+        setType(type)
+        {
+            this.type=type;
+        }
+    }
+
+    Vehicle.prototype.print=function ()
+    {
+        console.log('Vehicle is driving');
+    }
+
+    var van=new Vehicle('van');
+    console.log(Vehicle.VehicleCount);
+    console.log(van.getType());
+
+    class Car extends Vehicle
+    {
+        constructor(type) {
+            super(type);
+        }
+        balanceWheels()
+        {
+            console.log('Wheels are balanced');
+        }
+    }
+
+    var toyota=new Car('car');
+    toyota.balanceWheels();
+    toyota.print();
+    console.log(toyota.getType());
+    console.log(Vehicle.VehicleCount);
+
+
+</script>
+</body>
+</html>
